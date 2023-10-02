@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guessing Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div id="game">
+    <h1>Guessing Game</h1>
+    <p>Guess a number between 1 to 10</p>
+    <input type="number" id="guessInput">
+    <button onclick="checkGuess()">Submit</button>
+    <p id="result"></p>
+    <p id="attempts"></p>
+   </div>
+
+
+<script>
+    var randomNumber = Math.floor(Math.random() * 10) + 1;
+    var attempts = 5;
+
+    function checkGuess() {
+        var guessInput = document.getElementById('guessInput');
+        var result = document.getElementById('result');
+        var attemptsElement = document.getElementById('attempts');
+
+        var guess = parseInt(guessInput.value);
+
+        if (guess === randomNumber) {
+            result.textContent = 'Congratulations! You guessed the correct number!';
+            result.style.color = 'green';
+            guessInput.disabled = true;
+        }else {
+            attempts--;
+            result.textContent = 'Wrong guess. Try again!';
+            result.style.color = 'red';
+
+            if(attempts === 0) {
+                result.textContent += 'You are out o attempts!';
+                guessInput.disabled = true;
+            }
+        }
+
+        attemptsElement.textContent = 'Attempts left:' + attempts;
+    }
+</script>
+    
+</body>
+</html>
